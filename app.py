@@ -52,6 +52,9 @@ class SearchFilters(BaseModel):
 
 class SearchResponse(BaseModel):
     hotels: List[HotelInfo]  # Changed to match the actual hotel info being returned
+@app.get("/health")
+async def health_check():
+    return {"status": "OK", "message": "Server is running!"}
 
 @app.post("/hotels", response_model=SearchResponse)
 async def search_hotels(filters: SearchFilters = Body(...)):
